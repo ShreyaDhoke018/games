@@ -21,7 +21,6 @@ export default function NumberGuess() {
 
   function startNewGame() {
     const number = getRandomInt(1, 100);
-    console.log(number); // For testing - remove in production
     setGeneratedNumber(number);
     setChance(5);
     setGuess("");
@@ -203,3 +202,4 @@ export default function NumberGuess() {
   );
 
 }
+
