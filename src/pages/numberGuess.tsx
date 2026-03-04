@@ -9,7 +9,7 @@ function getRandomInt(min: number, max: number) {
 export default function NumberGuess() {
   const [generatedNumber, setGeneratedNumber] = useState<number>(0);
   const [guess, setGuess] = useState<string>("");
-  const [chance, setChance] = useState<number>(5);
+  const [chance, setChance] = useState<number>(3);
   const [msg, setMsg] = useState<string>("");
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [guessedNumbers, setGuessedNumbers] = useState<number[]>([]);
@@ -21,8 +21,9 @@ export default function NumberGuess() {
 
   function startNewGame() {
     const number = getRandomInt(1, 100);
+    console.log(number); // For testing - remove in production
     setGeneratedNumber(number);
-    setChance(5);
+    setChance(3);
     setGuess("");
     setMsg("");
     setGameOver(false);
@@ -200,6 +201,4 @@ export default function NumberGuess() {
       </div>
     </div>
   );
-
 }
-
