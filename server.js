@@ -113,16 +113,13 @@ function handlePlayerMove(playerId, data) {
   const room = rooms.get(roomId);
   if (!room || room.players.length !== 2) return;
 
-  // Record player's move
   const playerIndex = room.players.indexOf(playerId);
   const playerKey = `player${playerIndex + 1}`;
   room.moves[playerKey] = move;
 
-  // Check if both players have moved
   if (room.moves.player1 && room.moves.player2) {
     determineWinner(room);
   } else {
-    // Notify other player that opponent has moved
     const otherPlayerId = room.players.find(id => id !== playerId);
     sendToPlayer(otherPlayerId, {
       type: 'OPPONENT_MOVED'
@@ -153,10 +150,8 @@ function determineWinner(room) {
     message = `🎉 Player 2 wins! ${move2} beats ${move1}!`;
   }
 
-  // Check if game is over
   const gameOver = room.scores.player1 >= room.maxScore || room.scores.player2 >= room.maxScore;
 
-  // Send results to both players
   room.players.forEach((playerId, index) => {
     const playerResult = index === 0 ? result === 'player1' : result === 'player2';
     sendToPlayer(playerId, {
@@ -171,7 +166,6 @@ function determineWinner(room) {
     });
   });
 
-  // Clear moves for next round
   room.moves = {};
   room.roundActive = !gameOver;
 }
@@ -213,7 +207,6 @@ function handleDisconnect(playerId) {
   if (player && player.roomId) {
     const room = rooms.get(player.roomId);
     if (room) {
-      // Notify other player
       const otherPlayer = room.players.find(id => id !== playerId);
       if (otherPlayer) {
         sendToPlayer(otherPlayer, {
@@ -233,7 +226,8 @@ function sendToPlayer(playerId, data) {
   }
 }
 
-const PORT = 8080;
+// Use the port provided by Render or default to 8080
+const PORT = process.env.PORT || 8080;
 server.listen(PORT, () => {
   console.log(`WebSocket server running on port ${PORT}`);
 });
