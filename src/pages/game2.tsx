@@ -58,7 +58,11 @@ export default function Game2({}: Props) {
   // WebSocket connection
   useEffect(() => {
     if (gameMode === 'multi') {
-      const websocket = new WebSocket('ws://localhost:8080');
+      const WS_URL = process.env.NODE_ENV === 'production'
+      ? 'wss://games-wzum.onrender.com'  // Hardcoded for now
+      : 'ws://localhost:8080';
+    
+    const websocket = new WebSocket(WS_URL);
       
       websocket.onopen = () => {
         console.log('Connected to WebSocket server');
@@ -652,4 +656,5 @@ export default function Game2({}: Props) {
       `}</style>
     </div>
   )
+
 }
