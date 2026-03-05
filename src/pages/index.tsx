@@ -23,6 +23,14 @@ export default function Home() {
       icon: '🪨📄✂️',
       color: 'from-violet-600 to-fuchsia-600',
       path: '/game2'
+    },
+    {
+      id: 'wordScramble',
+      title: 'Word Scramble',
+      description: 'Guess the word from scrambled word!',
+      icon: '🔤🤔',
+      color: 'from-violet-600 to-fuchsia-600',
+      path: '/wordScramble'
     }
   ];
 
